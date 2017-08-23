@@ -17,3 +17,16 @@ class CrawllaItem(scrapy.Item):
 
 class Song(scrapy.Item):
     title = scrapy.Field()
+    bpm = scrapy.Field()
+    time = scrapy.Field()
+    type = scrapy.Field()
+    category = scrapy.Field()
+    start = scrapy.Field() # 実装日
+    difficulties = scrapy.Field()
+
+class Difficulty(scrapy.Item):
+    rank = scrapy.Field()
+    level = scrapy.Field()
+    stamina = scrapy.Field()
+    notes = scrapy.Field()
+    density = scrapy.Field()
