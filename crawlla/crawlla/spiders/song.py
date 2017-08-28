@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import os
 
 from .. import items
 
 
 class SongSpider(scrapy.Spider):
     name = "song"
-    allowed_domains = ["imascg-slstage-wiki.gamerch.com"]
-    start_urls = ('http://imascg-slstage-wiki.gamerch.com/',)
+    allowed_domains = [os.environ['targetDomain']]
+    start_urls = ('http://' + os.environ['targetDomain'],)
 
     def parse(self, response):
         # yield scrapy.Request(response.css('#js_oc_box_m1 ul li a::attr("href")').extract_first(), self.parse_topics)

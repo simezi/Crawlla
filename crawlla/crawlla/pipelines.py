@@ -17,7 +17,7 @@ class CrawllaPipeline(object):
         return item
 
 
-class FirebasePipeline(object):
+class FirebaseSongPipeline(object):
     def open_spider(self, spider):
         config = {
             "apiKey": os.environ['apiKey'],
@@ -30,10 +30,32 @@ class FirebasePipeline(object):
         self.db = firebase.database()
 
     def process_item(self, item, spider):
+        if not isinstance(item, items.Song):
+           return item
+
         # self.db.child("songs").set(json.dumps(dict(item), ensure_ascii=False, default=self.process_difficulties))
-        self.db.child("songs").push(dict(item), json_kwargs={"default": self.process_difficulties})
+        self.db.child("songs").child(dict(item)['title']).set(dict(item), json_kwargs={"default": self.process_difficulties})
 
     def process_difficulties(dif, val):
         if isinstance(val, items.Difficulty):
             return dict(val)
         raise TypeError(repr(val) + " is not JSON serializable")
+
+class FirebaseIdolPipeline(object):
+    def open_spider(self, spider):
+        config = {
+            "apiKey": os.environ['apiKey'],
+            "authDomain": os.environ['authDomain'],
+            "databaseURL": os.environ['databaseURL'],
+            "storageBucket": os.environ['storageBucket'],
+            "serviceAccount": os.environ['serviceAccount']
+        }
+        firebase = pyrebase.initialize_app(config)
+        self.db = firebase.database()
+
+
+    def process_item(self, item, spider):
+        if not isinstance(item, items.Idol):
+           return item
+        print('idolpipeline')
+        self.db.child("idols").child(dict(item)['name']).set(dict(item))

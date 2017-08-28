@@ -30,3 +30,23 @@ class Difficulty(scrapy.Item):
     stamina = scrapy.Field()
     notes = scrapy.Field()
     density = scrapy.Field()
+
+
+class Idol(scrapy.Item):
+    name = scrapy.Field()
+    nameHiragana = scrapy.Field()
+    type = scrapy.Field()
+    birthday = scrapy.Field()
+    constellation = scrapy.Field()
+    bloodType = scrapy.Field()
+    height = scrapy.Field()
+    weight = scrapy.Field()
+    bust = scrapy.Field()
+    waist = scrapy.Field()
+    hip = scrapy.Field()
+    hand = scrapy.Field()
+    birth = scrapy.Field()
+    cv = scrapy.Field()
+
+
+# class Card(scrapy.Item):
