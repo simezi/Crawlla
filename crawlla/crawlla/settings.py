@@ -68,6 +68,7 @@ DOWNLOAD_DELAY = 1
 ITEM_PIPELINES = {
     'crawlla.pipelines.FirebaseSongPipeline': 300,
     'crawlla.pipelines.FirebaseIdolPipeline': 400,
+    'crawlla.pipelines.FirebaseSongIdolPipeline': 500,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

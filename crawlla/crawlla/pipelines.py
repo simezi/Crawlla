@@ -59,3 +59,22 @@ class FirebaseIdolPipeline(object):
            return item
         print('idolpipeline')
         self.db.child("idols").child(dict(item)['name']).set(dict(item))
+
+class FirebaseSongIdolPipeline(object):
+    def open_spider(self, spider):
+        config = {
+            "apiKey": os.environ['apiKey'],
+            "authDomain": os.environ['authDomain'],
+            "databaseURL": os.environ['databaseURL'],
+            "storageBucket": os.environ['storageBucket'],
+            "serviceAccount": os.environ['serviceAccount']
+        }
+        firebase = pyrebase.initialize_app(config)
+        self.db = firebase.database()
+
+
+    def process_item(self, item, spider):
+        if not isinstance(item, items.SongIdols):
+           return item
+        print('idolpipeline')
+        self.db.child("songIdols").child(dict(item)['songName']).set(dict(item))
